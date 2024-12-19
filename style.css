@@ -8,15 +8,102 @@ body {
   grid-template-rows: auto 1fr;
 }
 
+dialog {
+  border: none;
+  border-radius: 24px;
+  width: 20vw;
+}
+
+form {
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+label {
+  font-size: 18px;
+}
+
+input {
+  border: 1px solid #888;
+  border-radius: 8px;
+  font-family: Montserrat;
+  font-size: 18px;
+  padding: 8px;
+}
+
+button {
+  background-color: #3498db;
+  border: none;
+  border-radius: 21px;
+  color: white;
+  cursor: pointer;
+  font-family: Montserrat;
+  font-size: 21px;
+  font-weight: 700;
+  padding: 12px 24px;
+}
+
+button:hover {
+  background-color: #2980b9;
+}
+
 .header {
   background-color: #2c3e50;
   color: white;
   padding: 24px 36px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .logo {
   font-size: 36px;
   font-weight: 700;
+}
+
+.form-header {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.close-dialog {
+  background-color: #eee;
+  border: 1px solid #eee;
+  border-radius: 50%;
+  color: #888;
+  font-size: 16px;
+  font-weight: 400;
+  height: 24px;
+  width: 24px;
+  padding: 0;
+}
+
+.close-dialog:hover {
+  background-color: #ccc;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.form-checkbox {
+  margin: 4px 0;
+  display: flex;
+  align-self: center;
+  align-items: center;
+  gap: 24px;
+}
+
+.form-checkbox input {
+  cursor: pointer;
 }
 
 .container {
