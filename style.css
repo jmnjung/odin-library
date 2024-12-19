@@ -114,6 +114,12 @@ button:hover {
   gap: 24px;
 }
 
+.book-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .book-description {
   display: flex;
   flex-direction: column;
@@ -132,4 +138,17 @@ button:hover {
 
 .book-pages {
   font-weight: 300;
+}
+
+.book-buttons {
+  display: flex;
+  align-items: center;
+  gap: 36px;
+}
+
+.book-buttons button {
+  background-color: inherit;
+  color: inherit;
+  font-size: 36px;
+  padding: 0;
 }

@@ -18,12 +18,17 @@ function Book(title, author, numPages, isRead) {
   this.isRead = isRead;
 }
 
+Book.prototype.changeStatus = function () {
+  this.isRead = !this.isRead;
+};
+
 function displayLibrary() {
   const bookDivs = [];
 
   myLibrary.forEach((book) => {
     const bookDiv = document.createElement("div");
     bookDiv.classList.add("book-card");
+    bookDiv.dataset.index = bookDivs.length;
 
     const textDiv = document.createElement("div");
     textDiv.classList.add("book-description");
@@ -43,6 +48,27 @@ function displayLibrary() {
     pagesDiv.textContent = `${book.numPages} pages`;
     pagesDiv.classList.add("book-pages");
     textDiv.appendChild(pagesDiv);
+
+    const buttonsDiv = document.createElement("div");
+    buttonsDiv.classList.add("book-buttons");
+    bookDiv.appendChild(buttonsDiv);
+
+    const statusBtn = document.createElement("button");
+    statusBtn.textContent = book.isRead ? "✅" : "❌";
+    statusBtn.addEventListener("click", () => {
+      book.changeStatus();
+      statusBtn.textContent = book.isRead ? "✅" : "❌";
+    });
+
+    const removeBtn = document.createElement("button");
+    removeBtn.textContent = "🗑️";
+    removeBtn.addEventListener("click", () => {
+      myLibrary.splice(parseInt(bookDiv.dataset.index), 1);
+      displayLibrary();
+    });
+
+    buttonsDiv.appendChild(statusBtn);
+    buttonsDiv.appendChild(removeBtn);
 
     bookDivs.push(bookDiv);
   });
