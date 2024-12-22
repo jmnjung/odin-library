@@ -9,18 +9,19 @@ const pagesInput = document.querySelector("#book-pages");
 const readInput = document.querySelector("#book-read");
 const addBtn = document.querySelector("dialog + button");
 const closeBtn = document.querySelector(".close-dialog");
-const submitBtn = document.querySelector(".form-checkbox + button");
 
-function Book(title, author, numPages, isRead) {
-  this.title = title;
-  this.author = author;
-  this.numPages = numPages;
-  this.isRead = isRead;
+class Book {
+  constructor(title, author, numPages, isRead) {
+    this.title = title;
+    this.author = author;
+    this.numPages = numPages;
+    this.isRead = isRead;
+  }
+
+  changeStatus() {
+    this.isRead = !this.isRead;
+  }
 }
-
-Book.prototype.changeStatus = function () {
-  this.isRead = !this.isRead;
-};
 
 function displayLibrary() {
   const bookDivs = [];
