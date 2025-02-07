@@ -27,32 +27,23 @@ function displayLibrary() {
   const bookDivs = [];
 
   myLibrary.forEach((book) => {
-    const bookDiv = document.createElement("div");
-    bookDiv.classList.add("book-card");
-    bookDiv.dataset.index = bookDivs.length;
+    const titleDiv = document.createElement("div");
+    titleDiv.classList.add("book-title");
+    titleDiv.textContent = book.title;
+
+    const authorDiv = document.createElement("div");
+    authorDiv.classList.add("book-author");
+    authorDiv.textContent = book.author;
+
+    const pagesDiv = document.createElement("div");
+    pagesDiv.classList.add("book-pages");
+    pagesDiv.textContent = `${book.numPages} pages`;
 
     const textDiv = document.createElement("div");
     textDiv.classList.add("book-description");
-    bookDiv.appendChild(textDiv);
-
-    const titleDiv = document.createElement("div");
-    titleDiv.textContent = book.title;
-    titleDiv.classList.add("book-title");
     textDiv.appendChild(titleDiv);
-
-    const authorDiv = document.createElement("div");
-    authorDiv.textContent = book.author;
-    authorDiv.classList.add("book-author");
     textDiv.appendChild(authorDiv);
-
-    const pagesDiv = document.createElement("div");
-    pagesDiv.textContent = `${book.numPages} pages`;
-    pagesDiv.classList.add("book-pages");
     textDiv.appendChild(pagesDiv);
-
-    const buttonsDiv = document.createElement("div");
-    buttonsDiv.classList.add("book-buttons");
-    bookDiv.appendChild(buttonsDiv);
 
     const statusBtn = document.createElement("button");
     statusBtn.textContent = book.isRead ? "✅" : "❌";
@@ -68,8 +59,16 @@ function displayLibrary() {
       displayLibrary();
     });
 
+    const buttonsDiv = document.createElement("div");
+    buttonsDiv.classList.add("book-buttons");
     buttonsDiv.appendChild(statusBtn);
     buttonsDiv.appendChild(removeBtn);
+
+    const bookDiv = document.createElement("div");
+    bookDiv.classList.add("book-card");
+    bookDiv.dataset.index = bookDivs.length;
+    bookDiv.appendChild(textDiv);
+    bookDiv.appendChild(buttonsDiv);
 
     bookDivs.push(bookDiv);
   });
