@@ -12,22 +12,25 @@
       <div class="logo">Library</div>
 
       <dialog>
-        <form method="dialog">
+        <form method="dialog" novalidate>
           <div class="form-header">
             <span>Add Book</span>
             <button class="close-dialog">✖</button>
           </div>
           <div class="form-group">
             <label for="book-title">Title</label>
-            <input type="text" id="book-title" name="book-title" required>
+            <input type="text" id="book-title" name="book-title" pattern="^\S(.*\S)?$" required>
+            <span class="error"></span>
           </div>
           <div class="form-group">
             <label for="book-author">Author</label>
-            <input type="text" id="book-author" name="book-author" required>
+            <input type="text" id="book-author" name="book-author" pattern="^\S(.*\S)?$" required>
+            <span class="error"></span>
           </div>
           <div class="form-group">
-            <label for="book-pages">Number of Pages</label>
-            <input type="number" id="book-pages" name="book-pages" required>
+            <label for="book-pages">Pages</label>
+            <input type="text" inputmode="numeric" id="book-pages" name="book-pages" pattern="[1-9]\d*" required>
+            <span class="error"></span>
           </div>
           <div class="form-checkbox">
             <label for="book-read">Completion Status</label>

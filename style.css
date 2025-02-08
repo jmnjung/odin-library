@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
 
 body {
-  font-family: Montserrat;
+  font-family: Montserrat, sans-serif;
   height: 100vh;
   margin: 0;
   display: grid;
@@ -11,7 +11,7 @@ body {
 dialog {
   border: none;
   border-radius: 24px;
-  width: 20vw;
+  width: 30%;
 }
 
 form {
@@ -28,7 +28,7 @@ label {
 input {
   border: 1px solid #888;
   border-radius: 8px;
-  font-family: Montserrat;
+  font-family: Montserrat, sans-serif;
   font-size: 18px;
   padding: 8px;
 }
@@ -39,7 +39,7 @@ button {
   border-radius: 21px;
   color: white;
   cursor: pointer;
-  font-family: Montserrat;
+  font-family: Montserrat, sans-serif;
   font-size: 21px;
   font-weight: 700;
   padding: 12px 24px;
@@ -104,6 +104,20 @@ button:hover {
 
 .form-checkbox input {
   cursor: pointer;
+}
+
+.error {
+  background-color: #900;
+  border-radius: 4px;
+  box-sizing: border-box;
+  color: white;
+  font-size: 80%;
+  padding: 0;
+  width: 100%;
+}
+
+.error.active {
+  padding: 0.4em;
 }
 
 .container {
