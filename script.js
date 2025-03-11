@@ -14,7 +14,8 @@ const addBtn = document.querySelector("dialog + button");
 const closeBtn = document.querySelector(".close-dialog");
 
 class Book {
-  constructor(title, author, numPages, isRead) {
+  constructor(id, title, author, numPages, isRead) {
+    this.id = id;
     this.title = title;
     this.author = author;
     this.numPages = numPages;
@@ -26,64 +27,70 @@ class Book {
   }
 }
 
-function displayLibrary() {
-  const bookDivs = [];
+function updateStatusButton(book, button) {
+  button.textContent = book.isRead ? "✅" : "❌";
+}
 
-  myLibrary.forEach((book) => {
-    const titleDiv = document.createElement("div");
-    titleDiv.classList.add("book-title");
-    titleDiv.textContent = book.title;
+function createBookCard(book) {
+  const titleDiv = document.createElement("div");
+  titleDiv.classList.add("book-title");
+  titleDiv.textContent = book.title;
 
-    const authorDiv = document.createElement("div");
-    authorDiv.classList.add("book-author");
-    authorDiv.textContent = book.author;
+  const authorDiv = document.createElement("div");
+  authorDiv.classList.add("book-author");
+  authorDiv.textContent = book.author;
 
-    const pagesDiv = document.createElement("div");
-    pagesDiv.classList.add("book-pages");
-    pagesDiv.textContent =
-      book.numPages > 1 ? `${book.numPages} pages` : `${book.numPages} page`;
+  const pagesDiv = document.createElement("div");
+  pagesDiv.classList.add("book-pages");
+  pagesDiv.textContent =
+    book.numPages > 1 ? `${book.numPages} pages` : `${book.numPages} page`;
 
-    const textDiv = document.createElement("div");
-    textDiv.classList.add("book-description");
-    textDiv.appendChild(titleDiv);
-    textDiv.appendChild(authorDiv);
-    textDiv.appendChild(pagesDiv);
+  const textDiv = document.createElement("div");
+  textDiv.classList.add("book-description");
+  textDiv.appendChild(titleDiv);
+  textDiv.appendChild(authorDiv);
+  textDiv.appendChild(pagesDiv);
 
-    const statusBtn = document.createElement("button");
-    statusBtn.textContent = book.isRead ? "✅" : "❌";
-    statusBtn.addEventListener("click", () => {
-      book.changeStatus();
-      statusBtn.textContent = book.isRead ? "✅" : "❌";
-    });
-
-    const removeBtn = document.createElement("button");
-    removeBtn.textContent = "🗑️";
-    removeBtn.addEventListener("click", () => {
-      myLibrary.splice(parseInt(bookDiv.dataset.index), 1);
-      displayLibrary();
-    });
-
-    const buttonsDiv = document.createElement("div");
-    buttonsDiv.classList.add("book-buttons");
-    buttonsDiv.appendChild(statusBtn);
-    buttonsDiv.appendChild(removeBtn);
-
-    const bookDiv = document.createElement("div");
-    bookDiv.classList.add("book-card");
-    bookDiv.dataset.index = bookDivs.length;
-    bookDiv.appendChild(textDiv);
-    bookDiv.appendChild(buttonsDiv);
-
-    bookDivs.push(bookDiv);
+  const statusBtn = document.createElement("button");
+  updateStatusButton(book, statusBtn);
+  statusBtn.addEventListener("click", () => {
+    book.changeStatus();
+    updateStatusButton(book, statusBtn);
   });
 
-  container.replaceChildren(...bookDivs);
+  const removeBtn = document.createElement("button");
+  removeBtn.textContent = "🗑️";
+  removeBtn.addEventListener("click", () => removeBookFromLibrary(book.id));
+
+  const buttonsDiv = document.createElement("div");
+  buttonsDiv.classList.add("book-buttons");
+  buttonsDiv.appendChild(statusBtn);
+  buttonsDiv.appendChild(removeBtn);
+
+  const bookDiv = document.createElement("div");
+  bookDiv.classList.add("book-card");
+  bookDiv.dataset.id = book.id;
+  bookDiv.appendChild(textDiv);
+  bookDiv.appendChild(buttonsDiv);
+
+  return bookDiv;
 }
 
 function addBookToLibrary(title, author, numPages, isRead) {
-  const newBook = new Book(title, author, numPages, isRead);
+  const id = crypto.randomUUID();
+  const newBook = new Book(id, title, author, numPages, isRead);
+  const newCard = createBookCard(newBook);
   myLibrary.push(newBook);
-  displayLibrary();
+  container.appendChild(newCard);
+}
+
+function removeBookFromLibrary(id) {
+  const bookIndex = myLibrary.findIndex((book) => book.id === id);
+  const bookCard = document.querySelector(`[data-id="${id}"]`);
+  if (bookIndex !== -1 && bookCard !== null) {
+    myLibrary.splice(bookIndex, 1);
+    container.removeChild(bookCard);
+  }
 }
 
 function showTitleError() {
